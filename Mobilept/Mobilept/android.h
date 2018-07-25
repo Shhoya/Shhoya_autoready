@@ -29,5 +29,8 @@ public:
 	void a_Data();
 	void appList();
 	void appDownload(string);
+	void memdump();
+	void app_build();
+
 	
 };
