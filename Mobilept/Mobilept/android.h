@@ -31,6 +31,7 @@ public:
 	void appDownload(string);
 	void memdump();
 	void app_build();
-
+	void exec_t(char*);
 	
 };
+
