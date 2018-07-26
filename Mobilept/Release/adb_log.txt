@@ -1,3 +1,0 @@
-List of devices attached 
-ce04171474b560b20c	device
-

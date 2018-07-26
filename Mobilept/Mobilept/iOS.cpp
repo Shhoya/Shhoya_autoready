@@ -38,7 +38,7 @@ void iOS::iOS_s()
 
 		case 4:
 			cout << "Thank you ;)" << endl;
-			//system("pause");
+			system("pause");
 			exit(0);
 
 		default:

@@ -32,6 +32,7 @@ public:
 	void memdump();
 	void app_build();
 	void exec_t(char*);
+	void exec_h(char*);
 	
 };
 

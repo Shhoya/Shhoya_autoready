@@ -14,7 +14,7 @@ void logo()
 	cout << "| \\____/ \\__, //_.___//____//_/   /_/    |" << endl;
 	cout << "|       /____/                           |" << endl;
 	cout << "|                                        |" << endl;
-	cout << "| Made by Shh0ya                         |" << endl;
+	cout << "| Made by Shh0ya              ver 1.0    |" << endl;
 	cout << " ========================================" << endl;
 	cout << endl;
 }
@@ -50,7 +50,7 @@ int main(void)
 
 		case 3:
 			cout << "Thank you ;)" << endl;
-			//system("pause");
+			system("pause");
 			return 0;
 
 		default:

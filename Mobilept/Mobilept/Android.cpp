@@ -10,9 +10,9 @@ using namespace std;
 
 HINSTANCE shell = ShellExecute(NULL, "find", "adb", NULL, NULL, SW_SHOW);
 const int len = 300;
-char decompile[len] = "/c java -jar apktools.jar d base.apk";
-char build[len] = "/c java -jar apktools.jar b base -o build.apk";
-char sign[len] = "/c java -jar signapk.jar testkey.x509.pem testkey.pk8 build.apk cyb3r1.apk";
+char decompile[len] = "/c java -jar ./tools/apktools.jar d base.apk";
+char build[len] = "/c java -jar ./tools/apktools.jar b base -o build.apk";
+char sign[len] = "/c java -jar ./tools/signapk.jar ./tools/testkey.x509.pem ./tools/testkey.pk8 build.apk cyb3r1.apk";
 
 void Android::AndroidMenu()
 {
@@ -68,7 +68,7 @@ void Android::Android_s()
 
 		case 0:
 			cout << "Thank you ;)" << endl;
-			//system("pause");
+			system("pause");
 			exit(0);
 
 		default:
@@ -99,10 +99,6 @@ void Android::appList()
 	ifstream openFile(app_list.data());
 	while (getline(openFile, line))
 	{
-		if (line == "")
-		{
-			break;
-		}
 		appnm[i] = line;
 		cout << i + 1 << ". " << appnm[i] << endl;
 		i++;
@@ -117,26 +113,13 @@ void Android::appList()
 
 void Android::appDownload(string appName)
 {
+	system("cls");
 	and_logo();
 	const char *nm = appName.c_str();
 	char pull[len] = "/c adb pull /data/app/";
 	strcat(pull, nm);
-	SHELLEXECUTEINFO dl_info;
-	ZeroMemory(&dl_info, sizeof(dl_info));
-	dl_info.cbSize = sizeof(dl_info);
-	dl_info.lpVerb = "open";
-	dl_info.lpFile = "cmd.exe";
-	dl_info.lpParameters = pull;
-	dl_info.fMask = SEE_MASK_NOCLOSEPROCESS;
-	dl_info.nShow = SW_HIDE;
-	int run = (int)ShellExecuteEx(&dl_info);
-	if (run != NULL)
-	{
-		cout << endl;
-		cout << "[+] Downloading " << nm << endl;
-		WaitForSingleObject(dl_info.hProcess, INFINITE);
-	}
-	cout << endl;
+	cout << endl<<"[+] Downloading ..." << endl;
+	exec_h(pull);
 	cout << "[+] Download Complete" << endl;
 	cout << "[*] Next Decompile ;)";
 	system("pause");
@@ -151,6 +134,7 @@ void Android::a_Decompile()
 {
 	system("cls");
 	and_logo();
+	cout << endl << "[+] Decompiling..." << endl;;
 	exec_t(decompile);
 	cout << "[+] Decompile Complete, Enj0y Rev3rs1ng" << endl;
 	system("pause");
@@ -165,64 +149,37 @@ void Android::a_Data()
 	string line;
 	int i = 0;
 	string appnm[1000];
-	char *pull = "/c adb pull /storage/emulated/0/Download/Autoready/";
-	//system("adb shell su -c 'ls /data/data' > data_list.txt");
-	//cout << endl;
-	//cout << "[+] Save data_list.txt" << endl;
-	//system("adb shell su -c 'mkdir /storage/emulated/0/Download/Autoready'");
-	//system("adb shell su -c 'cp -R /data/data /storage/emulated/0/Download/Autoready/'");
-	//cout << "[+] Wait a minute plz ;)";
-	//Sleep(5000);
-	//system("cls");
+	char pull[1000] = "/c adb pull /storage/emulated/0/Download/Autoready/data/";
+	system("adb shell su -c 'ls /data/data' > data_list.txt");
+	cout << endl;
+	cout << "[+] Save data_list.txt" << endl;
+	system("adb shell su -c 'mkdir /storage/emulated/0/Download/Autoready'");
+	ShellExecute(NULL, "open", "adb", "shell su -c 'cp -R /data/data /storage/emulated/0/Download/Autoready/'", NULL, SW_HIDE);
+	cout << "[+] Wait a minute plz ;)";
+	Sleep(5000);
+	system("cls");
 	ifstream openFile(app_list.data());
 	while (getline(openFile, line))
 	{
-		if (line == "")
-		{
-			break;
-		}
 		appnm[i] = line;
 		cout << i + 1 << ". " << appnm[i] << endl;
 		i++;
 	}
 	cout << "[*] Download Number : ";
 	cin >> i;
+	const char* nm = appnm[i - 1].c_str();
+	strcat(pull, nm);
+	cout << endl << "[+] Data Downloading..." << endl;
+	exec_h(pull);
+	system("adb shell su -c 'rm -rf /storage/emulated/0/Download/Autoready'");
+	cout << "[+] Complete, Honeyjam ;) " << endl;
 	openFile.close();
-	cout << appnm[i-1] << endl;
 	system("pause");
-
-	//system("pause");
-	//SHELLEXECUTEINFO cp_info;
-	//ZeroMemory(&cp_info, sizeof(cp_info));
-	//cp_info.cbSize = sizeof(cp_info);
-	//cp_info.lpVerb = "open";
-	//cp_info.lpFile = "cmd.exe";
-	//cp_info.lpParameters = pull;
-	//cp_info.fMask = SEE_MASK_NOCLOSEPROCESS;
-	//cp_info.nShow = SW_HIDE;
-	//ShellExecuteEx(&cp_info);
-	//WaitForSingleObject(cp_info.hProcess, INFINITE);
-	//SHELLEXECUTEINFO dl_info;
-	//ZeroMemory(&dl_info, sizeof(dl_info));
-	//dl_info.cbSize = sizeof(dl_info);
-	//dl_info.lpVerb = "open";
-	//dl_info.lpFile = "cmd.exe";
-	//dl_info.lpParameters = pull;
-	//dl_info.fMask = SEE_MASK_NOCLOSEPROCESS;
-	//dl_info.nShow = SW_HIDE;
-	//ShellExecuteEx(&dl_info);
-	//cout << endl;
-	//cout << "[+] Downloading " << nm << endl;
-	//WaitForSingleObject(dl_info.hProcess, INFINITE);
-	//cout << endl;
-	//cout << "[+] Download Complete" << endl;
-	//system("pause");*/
-	
 }
 
 void Android::memdump()
 {
-	cout << "memdump() Call" << endl;
+	cout << "Sorry.." << endl;
 
 }
 
@@ -233,14 +190,29 @@ void Android::app_build()
 {
 	system("cls");
 	and_logo();
-	exec_t(build);
+	exec_h(build);
 	cout << "[+] Building Complete" << endl;
 	cout << "[*] Sign Process Start" << endl;
-	exec_t(sign);
+	exec_h(sign);
 	system("del build.apk");
 	cout << "[+] Complete, Honeyjam ;) " << endl;
 	system("pause");
 	
+}
+
+void Android::exec_h(char* param)
+{
+	SHELLEXECUTEINFO build_info;
+	ZeroMemory(&build_info, sizeof(build_info));
+	build_info.cbSize = sizeof(build_info);
+	build_info.lpVerb = "open";
+	build_info.lpFile = "cmd.exe";
+	build_info.lpParameters = param;
+	build_info.fMask = SEE_MASK_NOCLOSEPROCESS;
+	build_info.nShow = SW_HIDE;
+	ShellExecuteEx(&build_info);
+	cout << endl;
+	WaitForSingleObject(build_info.hProcess, INFINITE);
 }
 
 void Android::exec_t(char* param)
