@@ -121,7 +121,7 @@ void Android::appDownload(string appName)
 	cout << endl<<"[+] Downloading ..." << endl;
 	exec_h(pull);
 	cout << "[+] Download Complete" << endl;
-	cout << "[*] Next Decompile ;)";
+	cout << "[*] Next Decompile ;)"<<endl;
 	system("pause");
 	a_Decompile();
 }
@@ -149,12 +149,12 @@ void Android::a_Data()
 	string line;
 	int i = 0;
 	string appnm[1000];
-	char pull[1000] = "/c adb pull /storage/emulated/0/Download/Autoready/data/";
+	char pull[1000] = "/c adb pull /sdcard/Download/Autoready/data/";
 	system("adb shell su -c 'ls /data/data' > data_list.txt");
 	cout << endl;
 	cout << "[+] Save data_list.txt" << endl;
-	system("adb shell su -c 'mkdir /storage/emulated/0/Download/Autoready'");
-	ShellExecute(NULL, "open", "adb", "shell su -c 'cp -R /data/data /storage/emulated/0/Download/Autoready/'", NULL, SW_HIDE);
+	system("adb shell su -c 'mkdir /sdcard/Download/Autoready'");
+	ShellExecute(NULL, "open", "adb", "shell su -c 'cp -R /data/data /sdcard/Download/Autoready/'", NULL, SW_HIDE);
 	cout << "[+] Wait a minute plz ;)";
 	Sleep(5000);
 	system("cls");
@@ -171,16 +171,33 @@ void Android::a_Data()
 	strcat(pull, nm);
 	cout << endl << "[+] Data Downloading..." << endl;
 	exec_h(pull);
-	system("adb shell su -c 'rm -rf /storage/emulated/0/Download/Autoready'");
+	system("adb shell su -c 'rm -rf /sdcard/Download/Autoready'");
 	cout << "[+] Complete, Honeyjam ;) " << endl;
 	openFile.close();
 	system("pause");
 }
 
+/*******************************/
+/* App Memory Dump via fridump */
+/*******************************/
 void Android::memdump()
 {
-	cout << "Sorry.." << endl;
-
+	system("cls");
+	and_logo();
+	char app_id[1000];
+	char memdump[1000] = "/c python ./tools/fridump.py -us ";
+	system("frida-ps -Ua");
+	Sleep(1000);
+	cout << "[*] Check App identifier" << endl;
+	cout << "[*] Input App Identifier : ";
+	cin >> app_id;
+	strcat(memdump, app_id);
+	cout << "[+] fridump start, Wait a minute plz ;) " << endl;
+	Sleep(1300);
+	exec_t(memdump);
+	cout << endl << "[+] Dump complete, Honeyjam ;) " << endl;
+	system("pause");
+	
 }
 
 /********************/

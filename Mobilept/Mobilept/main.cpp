@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <iostream>
 #include "android.h"
 #include "ios.h"
@@ -6,16 +6,16 @@
 using namespace std;
 void logo()
 {
-	cout << " ========================================" << endl;
-	cout << "|    ______        __    _____       ___ |" << endl;
-	cout << "|   / ____/__  __ / /_  |__  / _____<  / |" << endl;
-	cout << "|  / /    / / / // __ \\  /_ < / ___// /  |" << endl;
-	cout << "| / /___ / /_/ // /_/ /___/ // /   / /   |" << endl;
-	cout << "| \\____/ \\__, //_.___//____//_/   /_/    |" << endl;
-	cout << "|       /____/                           |" << endl;
-	cout << "|                                        |" << endl;
-	cout << "| Made by Shh0ya              ver 1.0    |" << endl;
-	cout << " ========================================" << endl;
+	cout << " ========================================================== " << endl;
+	cout << "|     ___         __  ____         _____           __      |" << endl;
+	cout << "|    /   | __  __/ /_/ __ \\   ____|__  /____ _____/ /_  __ |" << endl;
+	cout << "|   / /| |/ / / / __/ / / /  / ___//_ </ __ `/ __  / / / / |" << endl;
+	cout << "|  / ___ / /_/ / /_/ /_/ /  / /  ___/ / /_/ / /_/ / /_/ /  |" << endl;
+	cout << "| /_/  |_\\__,_/\\__/\\____/  /_/  /____/\\__,_/\\__,_/\\__, /   |" << endl;
+	cout << "|                                                /____/    |" << endl;
+	cout << "|                                                          |" << endl;
+	cout << "|  Made by Shh0ya of the Cy3r1                    v 1.0    |" << endl;
+	cout << " ========================================================== " << endl;
 	cout << endl;
 }
 /* Only select */
@@ -43,7 +43,7 @@ int main(void)
 		case 1:
 			a.Android_s();
 			break;
-			
+
 		case 2:
 			o.iOS_s();
 			break;

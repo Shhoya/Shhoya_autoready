@@ -16,8 +16,12 @@ void iOS::iOSMenu()
 
 void iOS::iOS_s()
 {
-
-	int select;
+	system("cls");
+	iOS_logo();
+	cout << endl << "[+] Comming soon" << endl;
+	Sleep(2000);
+	
+	/*int select;
 	while (1)
 	{
 		iOSMenu();
@@ -46,7 +50,7 @@ void iOS::iOS_s()
 			return;
 		}
 
-	}
+	}*/
 
 }
 
