@@ -11,6 +11,7 @@ class Android
 public:
 	void and_logo()
 	{
+		system("cls");
 		cout << "  =========================================== " << endl;
 		cout << "|   ___              _              _      _  |" << endl;
 		cout << "|  / _ \\            | |            (_)    | | |" << endl;
@@ -33,6 +34,7 @@ public:
 	void app_build();
 	void exec_t(char*);
 	void exec_h(char*);
+	void suspicious_str();
 	
 };
 

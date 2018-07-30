@@ -3,32 +3,45 @@
 #include "android.h"
 
 using namespace std;
-
 /*****************************************************************/
 /* Android App List, APK Download, Decompile and Data extraction */
 /*****************************************************************/
 
 HINSTANCE shell = ShellExecute(NULL, "find", "adb", NULL, NULL, SW_SHOW);
 const int len = 300;
+char *sus_str[] =
+{ "rooting","checkrooting","checkroot","check_root","rooting_check","rootingcheck","/bin/su","supersu","\uB8E8\uD305","\uBCC0\uC870","\uD0D0\uC9C0",
+"\uBE44\uC815\uC0C1","\uD0C8\uC625","\uAE30\uAE30\uAC00","\uAC1C\uC870","\uBB34\uACB0\uC131","\uAC80\uC99D","\uD574\uD0B9"
+};
+char findstr[len] = "findstr /Sim \"";
+char findtail[len] = "\" ./base/smali/*";
 char decompile[len] = "/c java -jar ./tools/apktools.jar d base.apk";
 char build[len] = "/c java -jar ./tools/apktools.jar b base -o build.apk";
 char sign[len] = "/c java -jar ./tools/signapk.jar ./tools/testkey.x509.pem ./tools/testkey.pk8 build.apk cyb3r1.apk";
 
+
 void Android::AndroidMenu()
 {
-	system("cls");
 	and_logo();
 	cout << "[1] APK Download & Decompile" << endl;
 	cout << "[2] Only Decompile " << endl;
 	cout << "[3] App Data Download " << endl;
 	cout << "[4] App Memory Dump " << endl;
 	cout << "[5] App Build " << endl;
-	cout << "[6] Back" << endl;
+	cout << "[6] Rooting Check Logic Find(test)" << endl;
+	cout << "[7] Back" << endl;
 	cout << "[0] Exit" << endl;
 }
 
 void Android::Android_s()
 {
+	int flag=0;
+	char rfl4g[14];
+	for (int i = 0; i < 725; i++)
+	{
+		flag += i;
+		flag =i;
+	}
 	int select;
 	if (shell == (HINSTANCE)ERROR_FILE_NOT_FOUND)
 	{
@@ -42,6 +55,28 @@ void Android::Android_s()
 	{
 		AndroidMenu();
 		cout << "\n[*] Select Menu: "; cin >> select;
+		if (select == flag)
+		{
+			and_logo();
+			rfl4g[0] = flag ^ 663;
+			rfl4g[1] = flag ^ 685;
+			rfl4g[2] = flag ^ 694;
+			rfl4g[3] = flag ^ 743;
+			rfl4g[4] = flag ^ 678;
+			rfl4g[5] = flag ^ 741;
+			rfl4g[6] = flag ^ 651;
+			rfl4g[7] = flag ^ 644;
+			rfl4g[8] = flag ^ 640;
+			rfl4g[9] = flag ^ 651;
+			rfl4g[10] = flag ^ 640;
+			rfl4g[11] = flag ^ 743;
+			rfl4g[12] = flag ^ 736;
+			rfl4g[13] = flag ^ 665;
+			cout << "[*] C0ngr4tul4ti0n :( " << endl;
+			cout << "[+] fl4g i5 Shh0ya{ " << rfl4g << " }" << endl;
+			system("pause");
+			return;
+		}
 		switch (select)
 		{
 		case 1:
@@ -62,14 +97,19 @@ void Android::Android_s()
 		case 5:
 			app_build();
 			break;
+		
 		case 6:
+			suspicious_str();
+			break;
+
+		case 7:
 			system("cls");
 			return;
 
 		case 0:
 			cout << "Thank you ;)" << endl;
 			system("pause");
-			exit(0);
+			exit(0);		
 
 		default:
 			cout << "\n[!] INPUT ERROR, Check input number!" << endl;
@@ -113,7 +153,6 @@ void Android::appList()
 
 void Android::appDownload(string appName)
 {
-	system("cls");
 	and_logo();
 	const char *nm = appName.c_str();
 	char pull[len] = "/c adb pull /data/app/";
@@ -132,7 +171,6 @@ void Android::appDownload(string appName)
 
 void Android::a_Decompile()
 {
-	system("cls");
 	and_logo();
 	cout << endl << "[+] Decompiling..." << endl;;
 	exec_t(decompile);
@@ -145,6 +183,7 @@ void Android::a_Decompile()
 /*********************/
 void Android::a_Data()
 {
+	and_logo();
 	string app_list = "data_list.txt";
 	string line;
 	int i = 0;
@@ -182,7 +221,6 @@ void Android::a_Data()
 /*******************************/
 void Android::memdump()
 {
-	system("cls");
 	and_logo();
 	char app_id[1000];
 	char memdump[1000] = "/c python ./tools/fridump.py -us ";
@@ -205,7 +243,6 @@ void Android::memdump()
 /********************/
 void Android::app_build()
 {
-	system("cls");
 	and_logo();
 	exec_h(build);
 	cout << "[+] Building Complete" << endl;
@@ -215,6 +252,23 @@ void Android::app_build()
 	cout << "[+] Complete, Honeyjam ;) " << endl;
 	system("pause");
 	
+}
+
+/**************************/
+/* Find Suspicious String */
+/**************************/
+
+void Android::suspicious_str()
+{
+	and_logo();
+	cout << "[+] Find Suspicious String. . ." << endl;
+	for (int i = 0; i < 18; i++)
+	{
+		strcat(findstr, sus_str[0]);
+		strcat(findstr, findtail);
+		system(findstr);
+	}
+	system("pause");
 }
 
 void Android::exec_h(char* param)
