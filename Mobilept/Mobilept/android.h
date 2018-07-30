@@ -3,6 +3,7 @@
 #include <fstream>
 #include <Windows.h>
 #include <string>
+#include <io.h>
 using namespace std;
 
 class Android
@@ -35,6 +36,7 @@ public:
 	void exec_t(char*);
 	void exec_h(char*);
 	void suspicious_str();
+	int exception_D();
 	
 };
 

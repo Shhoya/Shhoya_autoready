@@ -8,9 +8,9 @@ using namespace std;
 /*****************************************************************/
 
 HINSTANCE shell = ShellExecute(NULL, "find", "adb", NULL, NULL, SW_SHOW);
-const int len = 300;
+const int len = 1000;
 char *sus_str[] =
-{ "rooting","checkrooting","checkroot","check_root","rooting_check","rootingcheck","/bin/su","supersu","\uB8E8\uD305","\uBCC0\uC870","\uD0D0\uC9C0",
+{ "rooting","checkrooting","checkroot","check_root","rooting_check","rootingcheck"," \/bin\/su","supersu","\uB8E8\uD305","\uBCC0\uC870","\uD0D0\uC9C0",
 "\uBE44\uC815\uC0C1","\uD0C8\uC625","\uAE30\uAE30\uAC00","\uAC1C\uC870","\uBB34\uACB0\uC131","\uAC80\uC99D","\uD574\uD0B9"
 };
 char findstr[len] = "findstr /Sim \"";
@@ -18,6 +18,7 @@ char findtail[len] = "\" ./base/smali/*";
 char decompile[len] = "/c java -jar ./tools/apktools.jar d base.apk";
 char build[len] = "/c java -jar ./tools/apktools.jar b base -o build.apk";
 char sign[len] = "/c java -jar ./tools/signapk.jar ./tools/testkey.x509.pem ./tools/testkey.pk8 build.apk cyb3r1.apk";
+int dResult;
 
 
 void Android::AndroidMenu()
@@ -262,11 +263,21 @@ void Android::suspicious_str()
 {
 	and_logo();
 	cout << "[+] Find Suspicious String. . ." << endl;
+	int r=exception_D();
+	if (r == -1)
+	{
+		return;
+	}
 	for (int i = 0; i < 18; i++)
 	{
-		strcat(findstr, sus_str[0]);
-		strcat(findstr, findtail);
-		system(findstr);
+		char find_f[1000] = { 0, };
+		strcat(find_f, findstr);
+		strcat(find_f, sus_str[i]);
+		strcat(find_f, findtail);
+		cout << endl;
+		cout << "[+] Searching " << "\"" << sus_str[i] << "\"" << endl;
+		system(find_f);
+		
 	}
 	system("pause");
 }
@@ -300,5 +311,21 @@ void Android::exec_t(char* param)
 	ShellExecuteEx(&build_info);
 	cout << endl;
 	WaitForSingleObject(build_info.hProcess, INFINITE);
+	
+}
+
+int Android::exception_D()
+{
+	char *dir = "./base";
+	dResult = access(dir, 0);
+	if (dResult == -1)
+	{
+		cout << "[!] Not Found APK Decompile Directory.. Check Directory name ('base')"<<endl;
+		system("pause");
+		return dResult;
+	
+	}
+
+	return dResult;
 	
 }
