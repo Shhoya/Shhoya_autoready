@@ -14,7 +14,7 @@ void logo()
 	cout << "| /_/  |_\\__,_/\\__/\\____/  /_/  /____/\\__,_/\\__,_/\\__, /   |" << endl;
 	cout << "|                                                /____/    |" << endl;
 	cout << "|                                                          |" << endl;
-	cout << "|  Made by Shh0ya of the Cy3r1                v 1.1 beta   |" << endl;
+	cout << "|  Made by Shh0ya of the Cy3r1                v 1.2 beta   |" << endl;
 	cout << " ========================================================== " << endl;
 	cout << endl;
 }

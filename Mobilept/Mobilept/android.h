@@ -25,18 +25,20 @@ public:
 		cout << endl;
 	}
 	
-	void Android_s();
-	void AndroidMenu();
-	void a_Decompile();
-	void a_Data();
-	void appList();
-	void appDownload(string);
-	void memdump();
-	void app_build();
-	void exec_t(char*);
-	void exec_h(char*);
-	void suspicious_str();
-	int exception_D();
+	void Android_s(); // Select menu
+	void AndroidMenu(); // Print menu
+	void a_Decompile(); //APK Decompile
+	void a_Data(); // APP Data extraction
+	void appList(); // apk list extraction
+	void appDownload(string); //APK Download
+	void memdump(); // APP Memory dump
+	void app_build(); // APK Build
+	void exec_t(char*); // Shell execute function, SW_SHOW
+	void exec_h(char*); // Shell execute function, SW_HIDE
+	void suspicious_str(); // Search for Rooting detection string 
+	int exception_D(); // error exception
+	void Search(); // Search for APK , DATA name
+	void test(string);
 	
 };
 

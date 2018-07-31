@@ -10,9 +10,17 @@ using namespace std;
 HINSTANCE shell = ShellExecute(NULL, "find", "adb", NULL, NULL, SW_SHOW);
 const int len = 1000;
 char *sus_str[] =
-{ "rooting","checkrooting","checkroot","check_root","rooting_check","rootingcheck"," \/bin\/su","supersu","\uB8E8\uD305","\uBCC0\uC870","\uD0D0\uC9C0",
-"\uBE44\uC815\uC0C1","\uD0C8\uC625","\uAE30\uAE30\uAC00","\uAC1C\uC870","\uBB34\uACB0\uC131","\uAC80\uC99D","\uD574\uD0B9"
+{
+	"rooting","checkrooting","check_rooting","checkroot","check_root","rootcheck","root_check","rootingcheck","rooting_check"," \/bin\/su","supersu","\"su\"",
+	"\\uB8E8\\uD305", "\\uD0C8\\uC625", "\\uC704\\uC870", "\\uBCC0\\uC870", "\\uD0D0\\uC9C0", "\\uBE44\\uC815\\uC0C1", "\\uBB34\\uACB0\\uC131",
+	"\\uBCF4\\uC548", "\\uAC80\\uC99D", "\\uD574\\uD0B9", "\\uAE30\\uAE30\\uAC00", "\\uAC1C\\uC870"
 };
+
+char *list_hangul[] = {
+	"\uB8E8\uD305", "\uD0C8\uC625", "\uC704\uC870", "\uBCC0\uC870", "\uD0D0\uC9C0", "\uBE44\uC815\uC0C1", "\uBB34\uACB0\uC131",
+	"\uBCF4\uC548", "\uAC80\uC99D", "\uD574\uD0B9", "\uAE30\uAE30\uAC00", "\uAC1C\uC870"
+};
+
 char findstr[len] = "findstr /Sim \"";
 char findtail[len] = "\" ./base/smali/*";
 char decompile[len] = "/c java -jar ./tools/apktools.jar d base.apk";
@@ -29,19 +37,19 @@ void Android::AndroidMenu()
 	cout << "[3] App Data Download " << endl;
 	cout << "[4] App Memory Dump " << endl;
 	cout << "[5] App Build " << endl;
-	cout << "[6] Rooting Check Logic Find(test)" << endl;
+	cout << "[6] Find Rooting Detection Logic (test)" << endl;
 	cout << "[7] Back" << endl;
 	cout << "[0] Exit" << endl;
 }
 
 void Android::Android_s()
 {
-	int flag=0;
+	int flag = 0;
 	char rfl4g[14];
 	for (int i = 0; i < 725; i++)
 	{
 		flag += i;
-		flag =i;
+		flag = i;
 	}
 	int select;
 	if (shell == (HINSTANCE)ERROR_FILE_NOT_FOUND)
@@ -81,7 +89,7 @@ void Android::Android_s()
 		switch (select)
 		{
 		case 1:
-			appList();
+			Search();
 			break;
 		case 2:
 			a_Decompile();
@@ -98,7 +106,7 @@ void Android::Android_s()
 		case 5:
 			app_build();
 			break;
-		
+
 		case 6:
 			suspicious_str();
 			break;
@@ -110,7 +118,7 @@ void Android::Android_s()
 		case 0:
 			cout << "Thank you ;)" << endl;
 			system("pause");
-			exit(0);		
+			exit(0);
 
 		default:
 			cout << "\n[!] INPUT ERROR, Check input number!" << endl;
@@ -122,6 +130,61 @@ void Android::Android_s()
 	}
 
 }
+
+/**********************/
+/* Easy app searching */
+/**********************/
+// Current working
+void Android::Search()
+{
+	and_logo();
+	int i = 0;
+	string app_list = "app_list.txt";
+	string today_list = "today_list.txt";
+	string line;
+	string appnm[1000];
+	char select[2];
+	//system("adb shell su -c 'ls /data/app' > app_list.txt");
+	//cout << endl;
+	//cout << "[+] Check recently used apps" << endl;
+	//Sleep(1000);
+	//system("cls");
+	ifstream openFile(today_list.data());
+	while (getline(openFile, line))
+	{
+		appnm[i] = line;
+		cout << i + 1 << ". " << appnm[i] << endl;
+		i++;
+	}
+	cout << "[+] Are the app you want list here ? (y or n) :";
+	cin >> select;
+	if (select[0] == 'y' || select[0] == 'Y')
+	{
+		cout << "[*] Download Number : ";
+		cin >> i;
+		openFile.close();
+		cout << appnm[i - 1] << endl;
+		//appDownload(appnm[i - 1]);
+	}
+
+	else if (select[0] == 'n' || select[0] == 'N')
+	{
+		appList();
+		return;
+	}
+
+	else
+	{
+		cout << "\n[!] INPUT ERROR, Check input number!" << endl;
+		system("pause");
+		return;
+	}
+	return;
+
+
+}
+
+
 /*********************************/
 /* Print app list & app download */
 /*********************************/
@@ -158,12 +221,13 @@ void Android::appDownload(string appName)
 	const char *nm = appName.c_str();
 	char pull[len] = "/c adb pull /data/app/";
 	strcat(pull, nm);
-	cout << endl<<"[+] Downloading ..." << endl;
+	cout << endl << "[+] Downloading ..." << endl;
 	exec_h(pull);
 	cout << "[+] Download Complete" << endl;
-	cout << "[*] Next Decompile ;)"<<endl;
+	cout << "[*] Next Decompile ;)" << endl;
 	system("pause");
 	a_Decompile();
+	return;
 }
 
 /*****************/
@@ -177,6 +241,7 @@ void Android::a_Decompile()
 	exec_t(decompile);
 	cout << "[+] Decompile Complete, Enj0y Rev3rs1ng" << endl;
 	system("pause");
+	return;
 }
 
 /*********************/
@@ -215,6 +280,7 @@ void Android::a_Data()
 	cout << "[+] Complete, Honeyjam ;) " << endl;
 	openFile.close();
 	system("pause");
+	return;
 }
 
 /*******************************/
@@ -236,7 +302,8 @@ void Android::memdump()
 	exec_t(memdump);
 	cout << endl << "[+] Dump complete, Honeyjam ;) " << endl;
 	system("pause");
-	
+	return;
+
 }
 
 /********************/
@@ -252,7 +319,8 @@ void Android::app_build()
 	system("del build.apk");
 	cout << "[+] Complete, Honeyjam ;) " << endl;
 	system("pause");
-	
+	return;
+
 }
 
 /**************************/
@@ -261,25 +329,37 @@ void Android::app_build()
 
 void Android::suspicious_str()
 {
+	int j = 0;
 	and_logo();
 	cout << "[+] Find Suspicious String. . ." << endl;
-	int r=exception_D();
+	int r = exception_D();
 	if (r == -1)
 	{
 		return;
 	}
-	for (int i = 0; i < 18; i++)
+	for (int i = 0; i < 24; i++)
 	{
+
 		char find_f[1000] = { 0, };
 		strcat(find_f, findstr);
 		strcat(find_f, sus_str[i]);
 		strcat(find_f, findtail);
 		cout << endl;
-		cout << "[+] Searching " << "\"" << sus_str[i] << "\"" << endl;
-		system(find_f);
-		
+		if (i > 11)
+		{
+			cout << "[+] Searching " << "\"" << list_hangul[j] << "\"" << endl;
+			system(find_f);
+			j++;
+		}
+		else {
+			cout << "[+] Searching " << "\"" << sus_str[i] << "\"" << endl;
+			system(find_f);
+		}
 	}
+
+	cout << "[+] Complete, " << endl;
 	system("pause");
+	return;
 }
 
 void Android::exec_h(char* param)
@@ -311,7 +391,7 @@ void Android::exec_t(char* param)
 	ShellExecuteEx(&build_info);
 	cout << endl;
 	WaitForSingleObject(build_info.hProcess, INFINITE);
-	
+
 }
 
 int Android::exception_D()
@@ -320,12 +400,12 @@ int Android::exception_D()
 	dResult = access(dir, 0);
 	if (dResult == -1)
 	{
-		cout << "[!] Not Found APK Decompile Directory.. Check Directory name ('base')"<<endl;
+		cout << "[!] Not Found APK Decompile Directory.. Check Directory name ('base')" << endl;
 		system("pause");
 		return dResult;
-	
+
 	}
 
 	return dResult;
-	
+
 }

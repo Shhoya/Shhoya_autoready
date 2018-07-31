@@ -13,6 +13,22 @@ Simply install 'adb' and add a path.
 
 `pip install frida==11.0.6` ...
 
+
+
+# [+] Release 1.2 beta
+
+2018/07/31
+
+## [+] Add
+
+1. Added a detection string to the 'Find Rooting Detection Logic' menu.
+2. Added a recently install apk list to the 'APK Download&Decompile' menu.
+3. Added a some exception handling to this program.
+
+
+
+
+
 # [+] Release 1.1 beta #
 
 2018/07/30
