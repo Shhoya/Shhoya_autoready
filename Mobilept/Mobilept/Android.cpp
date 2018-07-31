@@ -11,7 +11,7 @@ HINSTANCE shell = ShellExecute(NULL, "find", "adb", NULL, NULL, SW_SHOW);
 const int len = 1000;
 char *sus_str[] =
 {
-	"rooting","checkrooting","check_rooting","checkroot","check_root","rootcheck","root_check","rootingcheck","rooting_check"," \/bin\/su","supersu","\"su\"",
+	"rooting","checkrooting","check_rooting","checkroot","check_root","rootcheck","root_check","rootingcheck","rooting_check"," \/bin\/su","supersu","\\\"su\\\"",
 	"\\uB8E8\\uD305", "\\uD0C8\\uC625", "\\uC704\\uC870", "\\uBCC0\\uC870", "\\uD0D0\\uC9C0", "\\uBE44\\uC815\\uC0C1", "\\uBB34\\uACB0\\uC131",
 	"\\uBCF4\\uC548", "\\uAC80\\uC99D", "\\uD574\\uD0B9", "\\uAE30\\uAE30\\uAC00", "\\uAC1C\\uC870"
 };
@@ -134,21 +134,21 @@ void Android::Android_s()
 /**********************/
 /* Easy app searching */
 /**********************/
-// Current working
+
 void Android::Search()
 {
 	and_logo();
 	int i = 0;
-	string app_list = "app_list.txt";
 	string today_list = "today_list.txt";
 	string line;
 	string appnm[1000];
 	char select[2];
-	//system("adb shell su -c 'ls /data/app' > app_list.txt");
-	//cout << endl;
-	//cout << "[+] Check recently used apps" << endl;
-	//Sleep(1000);
-	//system("cls");
+	system("adb shell su -c 'find /data/app/* -maxdepth 0 -ctime -3 -exec basename {} \\;' > today_list.txt");
+	cout << endl;
+	cout << "[+] Check recently used apps" << endl;
+	Sleep(1000);
+	system("cls");
+	and_logo();
 	ifstream openFile(today_list.data());
 	while (getline(openFile, line))
 	{
@@ -164,7 +164,7 @@ void Android::Search()
 		cin >> i;
 		openFile.close();
 		cout << appnm[i - 1] << endl;
-		//appDownload(appnm[i - 1]);
+		appDownload(appnm[i - 1]);
 	}
 
 	else if (select[0] == 'n' || select[0] == 'N')

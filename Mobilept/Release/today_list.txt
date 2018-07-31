@@ -1,0 +1,7 @@
+com.buzzni.android.subapp.shoppingmoa-1
+com.google.android.apps.docs-1
+com.hmallapp-1
+com.hyundaignf.mo.fashionmall-1
+com.samsung.android.spay-1
+com.sec.android.app.shealth-1
+flipboard.boxer.app-1

@@ -1,6 +1,22 @@
-﻿  코드를 생성하고 있습니다.
-  13 of 200 functions ( 6.5%) were compiled, the rest were copied from previous compilation.
-    2 functions were new in current compilation
-    19 functions had inline decision re-evaluated but remain unchanged
+﻿  Android.cpp
+d:\blog\shhoya_autoready\mobilept\mobilept\android.cpp(14): warning C4129: '/': 문자 이스케이프 시퀀스를 인식할 수 없습니다.
+d:\blog\shhoya_autoready\mobilept\mobilept\android.cpp(223): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(89): note: 'strcat' 선언을 참조하십시오.
+d:\blog\shhoya_autoready\mobilept\mobilept\android.cpp(276): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(89): note: 'strcat' 선언을 참조하십시오.
+d:\blog\shhoya_autoready\mobilept\mobilept\android.cpp(299): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(89): note: 'strcat' 선언을 참조하십시오.
+d:\blog\shhoya_autoready\mobilept\mobilept\android.cpp(344): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(89): note: 'strcat' 선언을 참조하십시오.
+d:\blog\shhoya_autoready\mobilept\mobilept\android.cpp(345): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(89): note: 'strcat' 선언을 참조하십시오.
+d:\blog\shhoya_autoready\mobilept\mobilept\android.cpp(346): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(89): note: 'strcat' 선언을 참조하십시오.
+d:\blog\shhoya_autoready\mobilept\mobilept\android.cpp(400): warning C4996: 'access': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _access. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\corecrt_io.h(441): note: 'access' 선언을 참조하십시오.
+  코드를 생성하고 있습니다.
+  0 of 205 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
-  Mobilept.vcxproj -> C:\Users\hyeonho\Desktop\업무\06.github\Shhoya_autoready\Mobilept\Release\Mobilept.exe
+  Mobilept.vcxproj -> D:\blog\Shhoya_autoready\Mobilept\Release\Mobilept.exe
