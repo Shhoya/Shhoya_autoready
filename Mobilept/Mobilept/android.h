@@ -38,7 +38,6 @@ public:
 	void suspicious_str(); // Search for Rooting detection string 
 	int exception_D(); // error exception
 	void Search(); // Search for APK , DATA name
-	void test(string);
 	
 };
 
