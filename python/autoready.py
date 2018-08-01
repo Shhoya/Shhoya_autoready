@@ -1,9 +1,11 @@
 # -*-coding:utf-8-*-
 import frida
-import sys, os, subprocess
-import argparse
+import sys, ctypes, os
+import subprocess
 import textwrap
 import logging
+
+adb_c = "dir > test.txt"
 logo = """
 	 ==========================================================
 	|     ___         __  ____         _____           __      |
@@ -17,24 +19,34 @@ logo = """
 	 ==========================================================
 """
 
+
+def subprocess_open(cmd):
+	result = os.system('ffff')
+
+
 def exec_cmd(cmd):
-    print cmd
+    return
+
 
 def all():
-    print "hh"
-    exec_cmd("test"+"cmd")
+    exec_cmd("test" + "cmd")
+
 
 def decompile():
-    print "decompile() call"
+    subprocess_open(adb_c)
+
 
 def data():
     print "data() call"
 
+
 def memdump():
     print "memdump() call"
 
+
 def build():
     print "build() call"
+
 
 def rootchk():
     print "rootchk() call"
@@ -52,30 +64,32 @@ def help():
     print " -r, --rootchk      Find Rooting Detection Logic(testing)"
     print "\n[+] https://shhoya.github.io"
 
+
 def RuN():
-    arglen=len(sys.argv)
+    arglen = len(sys.argv)
     print logo
-    if arglen>2:
+    if arglen > 2:
         print "[!] Too many arguments\n"
-    elif arglen==1:
-            help()
+    elif arglen == 1:
+        help()
     else:
-        if sys.argv[1]=='-a' or sys.argv[1]=='--all':
+        if sys.argv[1] == '-a' or sys.argv[1] == '--all':
             all()
-        elif sys.argv[1]=='-d' or sys.argv[1]=='--decompile':
+        elif sys.argv[1] == '-d' or sys.argv[1] == '--decompile':
             decompile()
-        elif sys.argv[1]=='-D' or sys.argv[1]=='--data':
+        elif sys.argv[1] == '-D' or sys.argv[1] == '--data':
             data()
-        elif sys.argv[1]=='-m' or sys.argv[1]=='--memdump':
+        elif sys.argv[1] == '-m' or sys.argv[1] == '--memdump':
             memdump()
-        elif sys.argv[1]=='-b' or sys.argv[1]=='--build':
+        elif sys.argv[1] == '-b' or sys.argv[1] == '--build':
             build()
-        elif sys.argv[1]=='-r' or sys.argv[1]=='--rootchk':
+        elif sys.argv[1] == '-r' or sys.argv[1] == '--rootchk':
             rootchk()
-        elif sys.argv[1]=='-h' or sys.argv[1]=='--help':
+        elif sys.argv[1] == '-h' or sys.argv[1] == '--help':
             help()
         else:
             help()
 
-if __name__=='__main__':
+
+if __name__ == '__main__':
     RuN()
