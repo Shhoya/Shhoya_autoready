@@ -1,0 +1,58 @@
+[+] Find Rooting Detection Logic [+]
+
+[+] rooting
+./base/smali/com\mcnc\parecis\bizmob\controller\ImpProcessController.smali
+./base/smali/com\mcnc\parecis\bizmob\view\ImpLoginActivity.smali
+
+[+] checkrooting
+
+[+] check_rooting
+./base/smali/com\mcnc\parecis\bizmob\controller\ImpProcessController.smali
+./base/smali/com\mcnc\parecis\bizmob\view\ImpLoginActivity.smali
+
+[+] checkroot
+
+[+] check_root
+./base/smali/com\mcnc\parecis\bizmob\controller\ImpProcessController.smali
+./base/smali/com\mcnc\parecis\bizmob\view\ImpLoginActivity.smali
+
+[+] rootcheck
+
+[+] root_check
+
+[+] rootingcheck
+
+[+] rooting_check
+
+[+]  \/bin\/su
+
+[+] supersu
+
+[+] \"su\"
+
+[+] 루팅
+
+[+] 탈옥
+
+[+] 위조
+
+[+] 변조
+
+[+] 탐지
+./base/smali/com\mcnc\parecis\bizmob\view\ImpLoginActivity.smali
+
+[+] 비정상
+
+[+] 무결성
+
+[+] 보안
+./base/smali/com\mcnc\parecis\bizmob\view\PaymentViewActivity.smali
+
+[+] 검증
+
+[+] 해킹
+
+[+] 기기가
+
+[+] 개조
+./base/smali/com\mcnc\parecis\bizmob\view\ImpLoginActivity.smali

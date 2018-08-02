@@ -1,0 +1,7 @@
+co.kr.hcn
+
+co.kr.gnf
+
+co.kr.
+
+find /data/app --type d -mtime -1 -exec ls -al {} \;
