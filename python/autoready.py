@@ -8,11 +8,11 @@ cmd_d = "java -jar ./tools/apktools.jar d ./base.apk"
 adb_p = "adb pull "
 adb_s = "adb shell su -c '"
 cmd_m = "python ./tools/fridump.py -us "
-sus_str=["rooting","checkrooting","check_rooting","checkroot","check_root","rootcheck","root_check","rootingcheck","rooting_check"," \/bin\/su","supersu","\\\"su\\\"",
+sus_str=["rooting","checkrooting","check_rooting","checkroot","check_root","rootcheck","root_check","rootingcheck","rooting_check","\\/bin\\/su","supersu",'\\\"su\\\"',
 	"\\uB8E8\\uD305", "\\uD0C8\\uC625", "\\uC704\\uC870", "\\uBCC0\\uC870", "\\uD0D0\\uC9C0", "\\uBE44\\uC815\\uC0C1", "\\uBB34\\uACB0\\uC131",
 	"\\uBCF4\\uC548", "\\uAC80\\uC99D", "\\uD574\\uD0B9", "\\uAE30\\uAE30\\uAC00", "\\uAC1C\\uC870"]
 sus_kor=["루팅", "탈옥", "위조", "변조", "탐지", "비정상", "무결성","보안", "검증", "해킹", "기기가", "개조"]
-test2="test"
+
 logo = """
 	 ==========================================================
 	|     ___         __  ____         _____           __      |
@@ -25,28 +25,25 @@ logo = """
 	|  Made by Shh0ya of the Cy3r1                v 1.2 beta   |
 	 ==========================================================
 """
-
+### Directory check###
 def dirchk():
 	dirnm='./base/smali'
 	if not os.path.isdir(dirnm):
 		print "[!] No Such 'base/smali' Directory "
 		exit(-1)
-
+### Read app_list , data_list, recent_list file ###
 def read_file(txtnm):
 	j = 0
-	listkk=[]
+	applist=[]
 	try:
 		with open(txtnm) as data:
 			lines = data.readlines()
 			if(len(lines) != 0):
 				for i in range(len(lines)):
-					if(i % 2 == 0):
-						listkk.append(lines[i])
-						j += 1
-						print "[" + str(j) + "] " + lines[i]
+					applist.append(lines[i])### save array
+					j += 1
+					print "[" + str(j) + "] " + lines[i]
 
-					else:
-						continue
 			else:
 				print "[!] No app in the", txtnm
 				exit(-1)
@@ -55,8 +52,9 @@ def read_file(txtnm):
 		print '[!] ', ex
 		exit(-1)
 
-	return listkk
+	return applist
 
+### Return shell command ###
 def read_ready(txtnm, a_path):
 		app_list = txtnm
 		rfile = read_file(app_list)
@@ -68,42 +66,72 @@ def read_ready(txtnm, a_path):
 		for i in range(len(shell)):
 			if(shell[i]=="\n"):
 				shell=shell[0:i]
+		if a_path=='/sdcard/Download/Autoready_apk/':
+			os.system(adb_s+"cp -R /data/app/"+shell+" /sdcard/Download/Autoready_apk/'")
+		else:
+			print "[+] Wait a minute plz ;)"
+			os.system(adb_s+"cp -R /data/data/"+shell+" /sdcard/Download/Autoready_data/'")
+			time.sleep(5)
+
 		shell=adb_p +a_path+shell
 		return shell
 
+### app_list, recent_list extraction and apk download, decompile process ###
 def all():
-	shell = read_ready("app_list.txt","/data/app/")
-	print shell #  os.system(shell) here
-	print "[+] Apk Download Complete!"
-	print "[*] Apk Decompile Processing. . ."
-	decompile()
+	os.system(adb_s+"find /data/app/* -maxdepth 0 -ctime -3 -exec basename {} \;' > recent_list.txt")
+	os.system(adb_s+"mkdir /sdcard/Download/Autoready_apk'")
+	select=raw_input("[*] Do you want to select from the list of recently installed apps? (y or n) : ")
 
+	if select=='y' or select=='Y':
+		shell = read_ready("recent_list.txt","/sdcard/Download/Autoready_apk/")
+		os.system(shell)
+		print "\n[+] APK file Download Complete!"
+		os.system(adb_s+"rm -rf /sdcard/Download/Autoready_apk'")
+		decompile()
+	else:
+		print "[*] App_list Downloading. . ."
+		os.system(adb_s+"ls /data/app' > app_list.txt")
+		shell = read_ready("app_list.txt","/sdcard/Download/Autoready_apk/")
+		os.system(shell)
+		print "[+] APK file Download Complete!"
+		decompile()
+
+### Only 'base.apk' decommpile ###
 def decompile():
-	print "[+] APK decompile ...\n"
+	print "\n[*] APK Decompile Processing. . .\n"
 	os.system(cmd_d)
 	print "\n[+] Decompile complete, enj0y r3v3r5ing ;-)\n"
 
-
+### App data extraction ###
 def data():
-	#Copy /data/data
-	shell = read_ready("data_list.txt","/sdcard/Download/Autoready/")
-	print "[*] Wait a minute plz ;-)"
-	time.sleep(5)
-	print "[*] Data Extracion Processing. . ."
-	print shell #  os.system(shell) here
-	print "[+] Data Extraction Complete"
+	os.system("mkdir app_data")
+	os.system(adb_s+"find /data/data/* -maxdepth 0 -ctime -3 -exec basename {} \;' > recent_dlist.txt")
+	os.system(adb_s+"mkdir /sdcard/Download/Autoready_data'")
+	select=raw_input("[*] Do you want to select from the list of recently data? (y or n) : ")
+	print "\n"
+	if select=='y' or select=='Y':
+		shell = read_ready("recent_dlist.txt","/sdcard/Download/Autoready_data/")
+		os.system(shell+" app_data")
+		print "\n[+] Data Extraction Complete"
+		os.system(adb_s+"rm -rf /sdcard/Download/Autoready_data'")
+	else:
+		os.system(adb_s+"ls /data/data' > data_list.txt")
+		shell = read_ready("data_list.txt","/sdcard/Download/Autoready_data/")
+		os.system(shell+" app_data")
+		print "\n[+] Data Extraction Complete"
+		os.system(adb_s+"rm -rf /sdcard/Download/Autoready_data'")
 
-
+### Full memory dump via fridump ###
 def memdump():
 	print "[*] Reading Process List. . ."
 	os.system("frida-ps -Ua")
 	procnm=raw_input('\n[*] Input App Identifiere : ')
 	procnm=cmd_m+procnm
 	os.system("cls")
-	print logo
 	print "[*] Memory dump Processing. . ."
 	os.system(procnm)
 
+### app build and sign
 def build():
 	shell = "java -jar ./tools/apktools.jar b base -o build.apk"
 	sign = "java -jar ./tools/signapk.jar ./tools/testkey.x509.pem ./tools/testkey.pk8 build.apk cyb3r1.apk"
@@ -119,8 +147,9 @@ def build():
 		print "[!] ", ex
 		exit(-1)
 
-
+### Find rooting detection logic via 'findstr'
 def rootchk():
+
 	j=0
 	dirchk()
 	f=open('check_root.txt','a+')
@@ -130,18 +159,19 @@ def rootchk():
 	for i in range(len(sus_str)):
 		if i<12:
 			f=open('check_root.txt','a+')
-			f.write("\n[+] "+sus_str[i]+"\n")
+			f.write("\n\n[+] Search string '"+sus_str[i]+"'\n")
 			f.close()
-			os.system("findstr /Sim "+sus_str[i]+" ./base/smali/* >> check_root.txt")
+			os.system('findstr /Sim '+sus_str[i]+' ./base/smali/* >> check_root.txt')
 		else:
 			f=open('check_root.txt','a+')
-			f.write("\n[+] "+sus_kor[j]+"\n")
+			f.write("\n\n[+] Search string '"+sus_kor[j]+"'\n")
 			f.close()
-			os.system("findstr /Sim "+sus_str[i]+" ./base/smali/* >> check_root.txt")
+			os.system('findstr /Sim '+sus_str[i]+' ./base/smali/* >> check_root.txt')
 			j+=1
 
-	print "\n[+] Searching Complete. \n[+] Please refer to the 'check_root.txt' in the current directory "
+	print "\n[+] Searching Complete. \n[+] Refer to the 'check_root.txt' in the current directory "
 
+###  arguments list of autoready
 def help():
 	print "[+] Usage : autoready.py <options>\n"
 
@@ -155,8 +185,17 @@ def help():
 	print " -R, --remove	    Remove all files without autoready"
 	print "\n[+] https://shhoya.github.io"
 
+###
 def remove_all():
-	print "remove_all() Call"
+	select=raw_input("[!] Are you sure you want to delete all files and directories except autoready in the current path ?(y or n) ")
+	if select=='Y' or select=='y':
+		print '[*] Delete files and directories. . .'
+		os.system("del *.txt")
+		os.system("del *.apk")
+		os.system("rd /s /q base app_data oat lib")
+		print '[+] Remove complete! '
+	else:
+		return
 
 def RuN():
 	arglen = len(sys.argv)
@@ -184,32 +223,7 @@ def RuN():
 		else:
 			help()
 
-def dep_test(cmd):
-	fd_popen = subprocess.Popen(cmd.split(), shell=True,stderr=subprocess.PIPE,stdout=subprocess.PIPE).stdout
-	data = fd_popen.read().strip()
-	fd_popen.close()
-	if cmd=='frida --version':
-		if data=='11.0.6':
-			return True
-		elif(data==''):
-			print "[!] you need install Frida 11.0.6 (pip install frida=11.0.6)"
-		else:
-			print "[!] Not match for frida version (Requirement 11.0.6)"
-	else:
-		if data=='':
-			print "[!] you need install "+cmd
-		else:
-			return True
 
 if __name__ == '__main__':
 	print logo
-	if len(sys.argv)==1:
-		print "[*] Check the execution environment. . .\n"
-		r=dep_test("frida --version")
-		r2=dep_test("adb")
-		if r==True and r2==True:
-			RuN()
-		else:
-			exit(-1)
-	else:
-		RuN()
+	RuN()
