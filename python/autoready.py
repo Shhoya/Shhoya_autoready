@@ -1,8 +1,6 @@
 # -*-coding:utf-8-*-
 import frida
-import sys,os,ctypes,time,subprocess
-import textwrap
-import logging
+import sys,os,time
 
 cmd_d = "java -jar ./tools/apktools.jar d ./base.apk"
 adb_p = "adb pull "
@@ -22,7 +20,7 @@ logo = """
 	| /_/  |_\\__,_/\\__/\\____/  /_/  /____/\\__,_/\\__,_/\\__, /   |
 	|                                                /____/    |
 	|                                                          |
-	|  Made by Shh0ya of the Cy3r1                v 1.2 beta   |
+	|  Made by Shh0ya of the Cyb3r1                    v 1.0   |
 	 ==========================================================
 """
 ### Directory check###
@@ -94,6 +92,7 @@ def all():
 		shell = read_ready("app_list.txt","/sdcard/Download/Autoready_apk/")
 		os.system(shell)
 		print "[+] APK file Download Complete!"
+		os.system(adb_s+"rm -rf /sdcard/Download/Autoready_apk'")
 		decompile()
 
 ### Only 'base.apk' decommpile ###
@@ -132,7 +131,7 @@ def memdump():
 	os.system(procnm)
 
 ### app build and sign
-def build():
+def install():
 	shell = "java -jar ./tools/apktools.jar b base -o build.apk"
 	sign = "java -jar ./tools/signapk.jar ./tools/testkey.x509.pem ./tools/testkey.pk8 build.apk cyb3r1.apk"
 	print "[*] Build Processing. . ."
@@ -140,6 +139,8 @@ def build():
 		os.system(shell)
 		print "\n[+] Build Complete, Sign Processing. . ."
 		os.system(sign)
+		print '[+] The app is being installed. . .'
+		os.system('adb install -r cyb3r1.apk')
 		print "[+] Complete, Go0d 1uck.."
 		os.system("del build.apk")
 
@@ -164,7 +165,7 @@ def rootchk():
 			os.system('findstr /Sim '+sus_str[i]+' ./base/smali/* >> check_root.txt')
 		else:
 			f=open('check_root.txt','a+')
-			f.write("\n\n[+] Search string '"+sus_kor[j]+"'\n")
+			f.write("\n\n[+] Search string '"+sus_kor[j]+"', '"+sus_str[i]+"'\n'")
 			f.close()
 			os.system('findstr /Sim '+sus_str[i]+' ./base/smali/* >> check_root.txt')
 			j+=1
@@ -180,7 +181,7 @@ def help():
 	print " -d, --decompile    APK Decompile via apktool"
 	print " -D, --data         App Data extraction"
 	print " -m, --memdump      Full memory dump of running app via fridump"
-	print " -b, --build        APK build & sign"
+	print " -i, --Install      APK build ,sign and install"
 	print " -r, --rootchk      Find Rooting Detection Logic(testing)"
 	print " -R, --remove	    Remove all files without autoready"
 	print "\n[+] https://shhoya.github.io"
@@ -190,9 +191,18 @@ def remove_all():
 	select=raw_input("[!] Are you sure you want to delete all files and directories except autoready in the current path ?(y or n) ")
 	if select=='Y' or select=='y':
 		print '[*] Delete files and directories. . .'
-		os.system("del *.txt")
-		os.system("del *.apk")
-		os.system("rd /s /q base app_data oat lib")
+		for (path, dir, files) in os.walk("./"):
+			for dirname in dir:
+				if dirname=='tools':
+					continue
+				else:
+					os.system('rd /s /q '+'"'+dirname+'""')
+			for filename in files:
+				ext = os.path.splitext(filename)[-1]
+				if ext=='.txt' or ext=='.apk':
+					os.system('del *'+ext)
+				else:
+					continue
 		print '[+] Remove complete! '
 	else:
 		return
@@ -212,8 +222,8 @@ def RuN():
 			data()
 		elif sys.argv[1] == '-m' or sys.argv[1] == '--memdump':
 			memdump()
-		elif sys.argv[1] == '-b' or sys.argv[1] == '--build':
-			build()
+		elif sys.argv[1] == '-i' or sys.argv[1] == '--install':
+			install()
 		elif sys.argv[1] == '-r' or sys.argv[1] == '--rootchk':
 			rootchk()
 		elif sys.argv[1] == '-R' or sys.argv[1] == '--remove':
