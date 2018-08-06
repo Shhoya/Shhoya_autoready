@@ -99,7 +99,7 @@ def all():
 def decompile():
 	print "\n[*] APK Decompile Processing. . .\n"
 	os.system(cmd_d)
-	print "\n[+] Decompile complete, enj0y r3v3r5ing ;-)\n"
+	print "\n[+] Decompile complete, enj0y ;-)\n"
 
 ### App data extraction ###
 def data():
@@ -124,14 +124,14 @@ def data():
 def memdump():
 	print "[*] Reading Process List. . ."
 	os.system("frida-ps -Ua")
-	procnm=raw_input('\n[*] Input App Identifiere : ')
+	procnm=raw_input('\n[*] Input PID : ')
 	procnm=cmd_m+procnm
 	os.system("cls")
 	print "[*] Memory dump Processing. . ."
 	os.system(procnm)
 
 ### app build and sign
-def install():
+def build():
 	shell = "java -jar ./tools/apktools.jar b base -o build.apk"
 	sign = "java -jar ./tools/signapk.jar ./tools/testkey.x509.pem ./tools/testkey.pk8 build.apk cyb3r1.apk"
 	print "[*] Build Processing. . ."
@@ -139,8 +139,6 @@ def install():
 		os.system(shell)
 		print "\n[+] Build Complete, Sign Processing. . ."
 		os.system(sign)
-		print '[+] The app is being installed. . .'
-		os.system('adb install -r cyb3r1.apk')
 		print "[+] Complete, Go0d 1uck.."
 		os.system("del build.apk")
 
@@ -181,7 +179,7 @@ def help():
 	print " -d, --decompile    APK Decompile via apktool"
 	print " -D, --data         App Data extraction"
 	print " -m, --memdump      Full memory dump of running app via fridump"
-	print " -i, --Install      APK build ,sign and install"
+	print " -b, --build        APK build ,sign"
 	print " -r, --rootchk      Find Rooting Detection Logic(testing)"
 	print " -R, --remove	    Remove all files without autoready"
 	print "\n[+] https://shhoya.github.io"
@@ -222,8 +220,8 @@ def RuN():
 			data()
 		elif sys.argv[1] == '-m' or sys.argv[1] == '--memdump':
 			memdump()
-		elif sys.argv[1] == '-i' or sys.argv[1] == '--install':
-			install()
+		elif sys.argv[1] == '-b' or sys.argv[1] == '--build':
+			build()
 		elif sys.argv[1] == '-r' or sys.argv[1] == '--rootchk':
 			rootchk()
 		elif sys.argv[1] == '-R' or sys.argv[1] == '--remove':
@@ -235,5 +233,7 @@ def RuN():
 
 
 if __name__ == '__main__':
+	os.system("adb start-server")
+	os.system('cls')
 	print logo
 	RuN()

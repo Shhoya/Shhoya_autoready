@@ -64,7 +64,7 @@ logging.basicConfig(format='%(levelname)s:%(message)s', level=DEBUG_LEVEL)
 session = None
 try:
     if USB:
-        session = frida.get_usb_device().attach(APP_NAME)
+        session = frida.get_usb_device().attach(int(APP_NAME))
     else:
         session = frida.attach(APP_NAME)
 except:
