@@ -97,6 +97,31 @@ def all():
 
 ### Only 'base.apk' decommpile ###
 def decompile():
+	dirnm=os.getcwd()
+	filenm=['']
+	pathnm=['']
+	i=0
+	for (path,dir,files) in os.walk(dirnm):
+	    for filename in files:
+	        ext=os.path.splitext(filename)[-1]
+	        if ext=='.apk':
+	            try:
+	                filenm[i]=os.path.join(path,filename)
+	                pathnm[i]=path
+	                i+=1
+	            except Exception as ex:
+	                print "[!] Decompile failure: Multiple '.apk' files exist."
+	                exit(-1)
+	apk=str(filenm[0])
+	if not filenm[0]:
+	    print '[!] Not found APK file'
+	    exit(-1)
+	elif not pathnm[0]==dirnm:
+	    os.system('move '+apk+' '+dirnm+'\\base.apk')
+	elif filenm[0]==dirnm+'\\base.apk':
+	    print '[+] Found base.apk'
+	else:
+	    os.system('rename '+apk+' base.apk')
 	print "\n[*] APK Decompile Processing. . .\n"
 	os.system(cmd_d)
 	print "\n[+] Decompile complete, enj0y ;-)\n"
