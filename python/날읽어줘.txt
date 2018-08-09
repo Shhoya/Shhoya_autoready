@@ -1,0 +1,49 @@
+	 ==========================================================
+	|     ___         __  ____         _____           __      |
+	|    /   | __  __/ /_/ __ \   ____|__  /____ _____/ /_  __ |
+	|   / /| |/ / / / __/ / / /  / ___//_ </ __ `/ __  / / / / |
+	|  / ___ / /_/ / /_/ /_/ /  / /  ___/ / /_/ / /_/ / /_/ /  |
+	| /_/  |_\__,_/\__/\____/  /_/  /____/\__,_/\__,_/\__, /   |
+	|                                                /____/    |
+	|                                                          |
+	|  Made by Shh0ya of the Cyb3r1                    v 1.0   |
+	 ==========================================================
+	 
+필요 도구
+python 2.7
+frida 11.x(12.x는 안됨 enumerate_range 에러 발생)
+adb
+그 외 압축 파일 내 tools 디렉토리
+
+
+	 
+python autoready.py --help 
+도움말
+
+python autoready.py -a 
+
+최근 설치한 앱 리스트에서 선택할 것인지에 선택지 존재. (y 또는 n 입력) , y 입력 시 최근 설치한 앱 목록이 출력되며 선택하여 apk 다운로드 및 디컴파일 진행
+n 입력 시 전체 앱 목록이 출력됨
+
+python autoready.py -d 디컴파일만 진행
+
+python autoready.py -D 
+-a 옵션과 마찬가지로 최근 설치된 앱 리스트 선택지 존재. 해당 앱의 데이터 다운로드
+
+python autoready.py -m 
+사용하기 전 안드로이드 단말기에서 frida-server 실행 필수. fridump를 이용해 메모리 덤프 가능. PID를 입력하여 덤프
+
+python autoready.py -b 
+'base.apk' 를 디컴파일하여 작업한 후 디컴파일된 base 디렉토리를 다시 빌드하여 사인 과정까지 진행
+디렉토리 이름이 base여야 하는게 함정. 아마 잘될듯.
+
+python autoready.py -r 
+문자열을 기준으로 ./base/smali 디렉토리에서 루팅탐지에 사용되는 문자열들을 검색해 해당 문자열이 발견된 small 파일 목록을 check_root.txt 로 저장
+
+python autoready.py -R 
+작업을 모두 끝낸 후 해당 옵션 사용 시 autoready 를 제외한 해당 프로그램으로 부터 생성된 파일,디렉토리 모두 삭제
+
+
+※Decoding me (base64)
+
+7J20IOq4gOydhCDsnb3qs6AgMTLsi5zqsIQg64K07JeQIOuPhOq1rOulvCDsi6TtlontlbTrs7Tsp4Ag7JWK64qUIOqyveyasCDqsIDripQg7ZSE66Gc7KCd7Yq466eI64ukIFJBTSAyZ2LsnZgg64W47Yq467aB7J2EIOygnOqzteuwm+yVhCDtlITroZzsoJ3tirjrpbwg7KeE7ZaJ7ZWY6rKMIOuQoCDqsoPsnbTrqbAg7ZWc6riAIDIwMDjroZwg67O06rOg7ISc66W8IOyekeyEse2VmOqyjCDrkKAg6rKDIOyeheuLiOuLpC4NCuuYkO2VnCDrs7jsgqzsl5DshJwg66i56rOg7J6QIO2VmOuKlCDtm4TroIzsuZjtjIzsnbQsIOuqveyJmCwg7L+g7YGs64uk7Iqk64qUIO2VreyDgSDruYTslrTsnofsnYQg6rKD7J2066mwIOunpOydvCBBQkMg7LSI7L2c66a/66eMIOuoueqyjCDrkKAg6rKDIOyeheuLiOuLpC4=

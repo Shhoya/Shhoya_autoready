@@ -209,7 +209,7 @@ def help():
 	print " -R, --remove	    Remove all files without autoready"
 	print "\n[+] https://shhoya.github.io"
 
-###
+### File remove
 def remove_all():
 	select=raw_input("[!] Are you sure you want to delete all files and directories except autoready in the current path ?(y or n) ")
 	if select=='Y' or select=='y':
