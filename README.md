@@ -1,7 +1,5 @@
 # Shhoya_autoready
-Android &amp; iOS autoready
-
-
+Android autoready
 
 # [+] Requirement
 
@@ -14,6 +12,14 @@ Simply install 'adb' and add a path.
 `pip install frida==11.0.6` ...
 
 
+
+# [+] Release 1.1 Python
+
+2018/11/29
+
+## [+] Add
+
+1. Searching function and bug fix
 
 # [+] Release 1.2 beta
 
