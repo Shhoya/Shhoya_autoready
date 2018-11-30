@@ -226,7 +226,7 @@ def searchUniq():
 	passport = re.compile("([MSRGD]\d{8})")
 	matchcount = 0
 	length =0
-	for root, dirs, files in os.walk('./'):
+	for root, dirs, files in os.walk('./app_data'):
 		for fname in files:
 			full_fname = os.path.join(root, fname)
 			try :
@@ -244,9 +244,9 @@ def searchUniq():
 				for matchobj in drvlicense.finditer(line):
 					print 'Suspicious File : '+full_fname+'\n'+'\tDriver\'s license number : \"'+matchobj.group()+'\"\n'
 					matchcount += 1
-				for matchobj in passport.finditer(line):
-					print 'Suspicious File : '+full_fname+'\n'+'\tPassport number : \"'+matchobj.group()+'\"\n'
-					matchcount += 1
+				#for matchobj in passport.finditer(line):
+				#	print 'Suspicious File : '+full_fname+'\n'+'\tPassport number : \"'+matchobj.group()+'\"\n'
+				#	matchcount += 1
 					
 			handle.close()
 	print "\n[+] Complete!"
