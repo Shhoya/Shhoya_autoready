@@ -15,11 +15,12 @@ Simply install 'adb' and add a path.
 
 # [+] Release 1.1 Python
 
-2018/11/29
+2018/11/30
 
 ## [+] Add
 
 1. Searching function and bug fix
+2. Searching information (`-s` option)
 
 # [+] Release 1.2 beta
 

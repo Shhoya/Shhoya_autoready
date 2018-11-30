@@ -218,8 +218,8 @@ def rootchk():
 
 def searchUniq():
 	print "[*] Searching Unique Identification Information ...\n"
-	jumin = re.compile("(\d{2}([0][1-9]|[1][1-2])\d{2}-[12349]\d{6})")
-	jumin2 = re.compile("(\d{2}([0][1-9]|[1][1-2])\d{2}[12349]\d{6})")
+	jumin = re.compile("(\d{2}([0][1-9]|[1][1-2])([0-2][0-9]|[3][0-1])-[12349]\d{6})")
+	jumin2 = re.compile("(\d{2}([0][1-9]|[1][1-2])([0-2][0-9]|[3][0-1])[12349]\d{6})")
 	cellnum = re.compile("(010\d{8})")
 	cellnum2 = re.compile("(010-\d{4}-\d{4})")
 	drvlicense = re.compile("([1-2]{2}-\d{2}-\d{6}-\d{2})")
